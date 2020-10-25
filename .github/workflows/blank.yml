@@ -1,0 +1,16 @@
+name: Ubuntu
+on: push
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@main
+      with:
+       mode: ngrok
+      env:
+       NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+       NGROK_REGION: us
+       SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+    - name: Don't kill instace  
+      run: sleep 6h
