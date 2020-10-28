@@ -13,6 +13,6 @@ jobs:
         sudo mv ngrok /usr//bin/ngrok
         ngrok authtoken ${{ secrets.NGROK_TOKEN }}
         echo runner:S${{ secrets.SSH_PASSWORD }} |sudo chpasswd runner
-        screen ngrok tcp 22
+        ngrok tcp 22
     - name: Don't kill instace  
       run: sleep 6h
