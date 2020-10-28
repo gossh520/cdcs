@@ -12,7 +12,7 @@ jobs:
         unzip ngrok-stable-linux-amd64.zip
         sudo mv ngrok /usr//bin/ngrok
         ngrok authtoken ${{ secrets.NGROK_TOKEN }}
-        echo runner:S${{ secrets.SSH_PASSWORD }} |sudo chpasswd runner
-        ngrok tcp 22
+        echo runner:${{ secrets.SSH_PASSWORD }} |sudo passwd runner
+        ngrok tcp 22 >/dev/null 2>&1 &
     - name: Don't kill instace  
       run: sleep 6h
