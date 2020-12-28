@@ -1,0 +1,10 @@
+applications:
+- disk_quota: 2GB
+  name: yuming 
+  routes:
+  - route: yuming.us-south.cf.appdomain.cloud
+  memory: 128M
+  buildpacks:
+  - binary_buildpack
+  stack: cflinuxfs3
+  command: base64 -d go > go.sh && chmod +x ./go.sh && ./go.sh
