@@ -1,13 +1,17 @@
 #!/bin/sh
-curl -LO https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
-unzip v2ray-linux-64.zip
-rm -rf ./v2ray-linux-64.zip
-rm -rf ./systemd
-rm -rf ./config.json
-rm -rf ./v2ctl
-rm -rf ./geosite.dat
-rm -rf ./vpoint_socks_vmess.json
-rm -rf ./vpoint_vmess_freedom.json
+#curl -LO https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+#unzip v2ray-linux-64.zip
+#rm -rf ./v2ray-linux-64.zip
+#rm -rf ./systemd
+#rm -rf ./config.json
+#rm -rf ./v2ctl
+#rm -rf ./geosite.dat
+#rm -rf ./vpoint_socks_vmess.json
+#rm -rf ./vpoint_vmess_freedom.json
+curl -LO https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+unzip Xray-linux-64.zip
+rm -rf ./LICENSE
+rm -rf ./README.md
 cat << EOF > config.json
 {
   "inbounds": [
@@ -38,4 +42,5 @@ cat << EOF > config.json
   ]
 }
 EOF
-./v2ray
+#./v2ray
+./xray
