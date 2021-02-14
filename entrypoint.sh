@@ -12,6 +12,7 @@ curl -LO https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-6
 unzip Xray-linux-64.zip
 rm -rf ./LICENSE
 rm -rf ./README.md
+chmod +x ./xray
 cat << EOF > config.json
 {
   "inbounds": [
