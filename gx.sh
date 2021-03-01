@@ -3,6 +3,7 @@ echo "开始执行更新仓库代码"
 cd /elecV2P/script/Shell/scripts
 git reset --hard
 git -C /elecV2P/script/Shell/scripts pull --rebase
+wget -P /elecV2P/script/Shell/scripts -q https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
 if [[ ${ENABLE_HANGUP} == true ]]; then
     jdpid=$(ps -ef | grep "jd_crazy" | awk '{print $1}')
     echo "joy进程pid=$jdpid"
