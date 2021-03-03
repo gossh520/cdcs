@@ -13,7 +13,7 @@ chmod +x ./v2ray
 #rm -rf ./LICENSE
 #rm -rf ./README.md
 #chmod +x ./xray
-#cat << EOF > config.json
+cat << EOF > config.json
 {
     "log": {
         "loglevel": "warning"
