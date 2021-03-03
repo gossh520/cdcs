@@ -5,7 +5,6 @@ rm -rf ./v2ray-linux-64.zip
 rm -rf ./systemd
 rm -rf ./config.json
 rm -rf ./v2ctl
-rm -rf ./geosite.dat
 rm -rf ./vpoint_socks_vmess.json
 rm -rf ./vpoint_vmess_freedom.json
 chmod +x ./v2ray
@@ -14,34 +13,81 @@ chmod +x ./v2ray
 #rm -rf ./LICENSE
 #rm -rf ./README.md
 #chmod +x ./xray
-cat << EOF > config.json
+#cat << EOF > config.json
 {
-  "inbounds": [
-  {
-    "port": 8080,
-    "protocol": "vmess",
-    "settings": {
-      "clients": [
-        {
-          "id": "ad806487-2d26-4636-98b6-ab85cc8521f7",
-          "alterId": 4       
-        }
-      ]
+    "log": {
+        "loglevel": "warning"
     },
-    "streamSettings": {
-      "network": "ws",
-      "wsSettings": {
-      "path": "/ws"
-      }     
-    }
-  }
-  ],
-  "outbounds": [
-  {
-    "protocol": "freedom",
-    "settings": {}
-  }
-  ]
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "inboundTag": "wsdoko",
+                "outboundTag": "ssredirect"
+            },
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "blocked"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "port": 8080,
+            "protocol": "dokodemo-door",
+            "tag": "wsdoko",
+            "settings": {
+                "address": "v1.mux.cool",
+                "followRedirect": false,
+                "network": "tcp, udp"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/peng"
+                }
+            }
+        },
+        {
+            "port": 9090,
+            "protocol": "shadowsocks",
+            "settings": {
+                "method": "chacha20-ietf-poly1305",
+                "password": "peng",
+                "network": "tcp,udp"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {},
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "blocked"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "ssredirect",
+            "settings": {
+                "redirect": "127.0.0.1:9090"
+            }
+        }
+    ]
 }
 EOF
 ./v2ray
