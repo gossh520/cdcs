@@ -1,6 +1,6 @@
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/gossh520/cdcs/main/gx.sh'
-    await $download(url, '/elecV2P/script/Shell/gx.sh', {folder: '/elecV2P/script/Shell', name: 'gx.sh'})
+    await $download(url, '/usr/local/app/script/Shell/gx.sh', {folder: '/usr/local/app/script/Shell', name: 'gx.sh'})
 }
 
 
