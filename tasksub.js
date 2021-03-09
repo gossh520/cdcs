@@ -2,7 +2,7 @@
 // 每次运行都会添加新任务，请不要多次运行
 // 这只是一个简单的范例，如果出现未知问题，手动修正一下代码
 
-const suburl = 'https://www.armn1.ml/jiaoben/Task_node.conf'
+const suburl = 'https://raw.cnm.workers.dev/gossh520/cdcs/main/Task_node.conf'
 
 const webhook = {
   url: 'http://127.0.0.1:80/webhook',              // 远程： http://sss.xxxx.com/webhook
@@ -14,11 +14,11 @@ $axios(suburl).then(res=>{
   const mastr = body.matchAll(/([0-9\-\,\*\/]+ [0-9\-\,\*\/]+ [0-9\-\,\*\/]+ [0-9\-\,\*\/]+ [0-9\-\,\*\/]+( [0-9\-\,\*\/]+)?) ([^ ,]+), ?tag=([^, \n\r]+), ?enabled=([^, \n\r]+), ?moshi=([^, \n\r]+)/g)
   
   ;[...mastr].forEach(mr=>{
-    console.log('返回数据: ' + (mr[6]))
     if (mr[3] && mr[1]) {
-    if (mr[6] == "exec") nodejs = "node " + mr[3], moshi = "exec";
-    if (mr[6] == "runjs") nodejs = mr[3], moshi = "runjs";
-    if (mr[6] == "sh") nodejs = mr[3], moshi = "exec";
+    if (mr[6] == "exec") nodejs = "node " + mr[3], renwu = "cron", moshi = "exec";
+    if (mr[6] == "runjs") nodejs = mr[3], renwu = "cron", moshi = "runjs";
+    if (mr[6] == "sh") nodejs = mr[3], renwu = "cron", moshi = "exec";
+	if (mr[6] == "down") nodejs = mr[3], renwu = "schedule", moshi = "runjs";
       $axios({
         url: webhook.url,
         method: 'post',
@@ -27,7 +27,7 @@ $axios(suburl).then(res=>{
           type: 'taskadd',
           task: {
             name: mr[4] || 'tasksub-新的任务',
-            type: 'cron',
+            type: renwu,
             job: {
               type: moshi,
               target: nodejs,
