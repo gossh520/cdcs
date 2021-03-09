@@ -1,0 +1,1 @@
+{"CWTnzKPu":{"name":"批量添加任务","type":"schedule","job":{"type":"runjs","target":"https://www.armn1.ml/jiaoben/tasksub.js"},"time":"10","running":true,"id":"CWTnzKPu"}}
