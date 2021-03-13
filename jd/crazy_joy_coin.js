@@ -6,7 +6,6 @@ $exec('kill $(ps -ef | grep "jd_crazy" |cut -c3-5) | node ./scripts/jd_crazy_joy
   cwd: './script/Shell/',
   env: {
     JD_COOKIE: JD_COOKIE1
-    BUY_JOY_LEVEL: 0
   },
   cb(data){
     console.log(data)
