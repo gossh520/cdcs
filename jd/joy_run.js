@@ -5,7 +5,8 @@ if (String($store.get('CookieJD2', 'raw')) != "undefined" && String($store.get('
 $exec('node ./scripts/jd_joy_run.js', {
   cwd: './script/Shell/',
   env: {
-    JD_COOKIE: JD_COOKIE1
+    JD_COOKIE: JD_COOKIE1,
+    JOY_RUN_HELP_MYSELF: true
   },
   cb(data){
     console.log(data)
